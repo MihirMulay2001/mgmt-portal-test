@@ -1,15 +1,14 @@
 
-import styles from '../../src/assets/css/modules/meetings.module.css'
+import styles from '../../../assets/css/modules/meetings.module.css'
 import Navbar from '../../Navbar/Navbar'
 import Content from '../../layout/Content'
 
-export default function createmeet() {
+export default function CreateMeet() {
     return (
         <>
-            <Navbar active="meetings" />
-            <Content>
-                
-            </Content>
+            <div>
+                Create meet
+            </div>
         </>
     )
 }
