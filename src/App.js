@@ -13,7 +13,7 @@ export default class App extends Component {
                         <Route exact path='/'>
                             <LandingPage />
                         </Route>
-                        <Route exact path='/dashboard'>
+                        <Route path='/dashboard'>
                             <DashBoard />
                         </Route>
                     </Switch>

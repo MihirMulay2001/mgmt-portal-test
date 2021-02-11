@@ -1,7 +1,7 @@
 import { Formik, Field, Form, ErrorMessage} from 'formik'
 import styles from '../../../assets/css/modules/inputform.module.css'
-import {useState} from 'react'
-import {Link} from 'react-router-dom'
+import {useState,useEffect} from 'react'
+import {Redirect, Link} from 'react-router-dom'
 
 
 async function getData(values){
@@ -13,7 +13,7 @@ async function getData(values){
         body: JSON.stringify(values)
     })
     const dataJson = await data.json();
-    console.log(dataJson);
+    console.log('fetched');
     return dataJson
 }
 
@@ -29,7 +29,8 @@ const validateValues = (values) =>{
 }
 
 export default function Login() {
-    const [data,setData] = useState({})
+    let [data, setData] = useState({})
+    console.log(data);
     
     return (
         <div>
@@ -37,15 +38,16 @@ export default function Login() {
                 initialValues = {{ username:'' , password : '' }}
                 validate = {validateValues}
                 onSubmit = {
-                    (values, {setSubmitting}) =>{
-                        console.log("hello");
-                        setTimeout(()=>{
+                    (values,{setSubmitting}) =>{
+                        setTimeout(async ()=>{
                             console.log(JSON.stringify(values));
-                            setData( getData(values))
+                            const {Token, message} = await getData(values)
+                            setData({Token,message})
                             setSubmitting(false);
                         }, 500)
+                        
                     }
-                }
+                    }
             >
                 <Form className={styles.form}>
                     <div className={styles.element}>
@@ -58,20 +60,9 @@ export default function Login() {
                         <Field name="password" type="password" />
                         <span><ErrorMessage name="password" /></span>
                     </div>
-                    <Link to='/dashboard'><button type="submit">Login</button></Link>
+                    <button type="submit">Login</button>
                 </Form>
             </Formik>
         </div>
     )
 }
-
-/*
-fetch ('https://stc-mgmt-portal.herokuapp.com/user/login', {
-                                    method:'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify(values)
-                                }).then(res => res.json())
-                                .then(({Token,message}) => alert(Token))
-                                */
