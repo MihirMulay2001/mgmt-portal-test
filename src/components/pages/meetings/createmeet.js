@@ -1,48 +1,58 @@
 import styles from '../../../assets/css/modules/inputform.module.css'
 import styles2 from '../../../assets/css/modules/createmeet.module.css'
-import Navbar from '../../Navbar/Navbar'
-import Content from '../../layout/Content/index'
 import {Field, Formik, ErrorMessage, Form} from 'formik'
+import {useState, useEffect} from 'react'
+
+const getMeetingInfo = async (roomName) =>{
+    const authToken ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIxYTU5Mzg4OGYzMTAwMTU0NzliMjMiLCJpYXQiOjE2MTMxMTA4NDd9.C4VrazaN10hf90yr9VtYnX7O3iY4f6ijgV_AEa3dGmQ'
+   
+    const data = await fetch('https://stc-mgmt-portal.herokuapp.com/meeting/createMeet',{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'auth-token': authToken
+
+        },
+        body: JSON.stringify({'roomName':roomName})
+    })
+    const dataJson = await data.json()
+    return dataJson;
+}
+
+
 
 const validateValues = (values) =>{
     let error= {};
     if(!values.displayname){
         error.displayname = '*required'
     }
-    if(!values.meetname){
-        error.meetname = '*required'
+    if(!values.roomName){
+        error.roomName = '*required'
     }
     return error;
 }
 
-export default function JoinMeet() {
+export default function CreateMeet({setMeetingDetails}) {
     return (
         <>
             <div className={styles2.container}>
                 <h1> Enter room name</h1>
                 <Formik
-                    initialValues= {{meetname: '', displayname: ''}}
+                    initialValues= {{roomName: '', displayname: ''}}
                     validate = {validateValues}
                     onSubmit = {
-                        (values, {setSubmitting}) =>{
-                            console.log(values);
-                            // fetch ('', {
-                            //         method:'POST',
-                            //         headers: {
-                            //             'Content-Type': 'application/json',
-                            //         },
-                            //         body: JSON.stringify(values)
-                            //     }).then(res => res.json())
-                            //     .then(({message}) => alert(message, "Please Login with your credentials"))
-                                setSubmitting(false);
+                        async (values, {setSubmitting}) =>{
+                            setSubmitting(true);
+                            setMeetingDetails(await getMeetingInfo(values.roomName));
+                            setSubmitting(false);
                         }
                     }
                 >
                     <Form className={styles.form}>
                         <div className={styles.element}>
-                            <label htmlFor="meetname">Meet Name</label>
-                            <Field name="meetname" type="text" />
-                            <span ><ErrorMessage name="meetname" /></span>
+                            <label htmlFor="roomName">Meet Name</label>
+                            <Field name="roomName" type="text" />
+                            <span ><ErrorMessage name="roomName" /></span>
                         </div>
                         <div className={styles.element}>
                             <label htmlFor="displayname">Display Name</label>

@@ -7,6 +7,7 @@ import Meetings from '../pages/meetings/Meetings'
 
 
 export default function Dashboard() {
+
     const match = useRouteMatch()
     return (
         <>
@@ -18,10 +19,9 @@ export default function Dashboard() {
                     <Projects path={match.url} />
                 </Route>
                 <Route path={`/dashboard/meetings`}>
-                    <Meetings path={match.url} />
+                    <Meetings path={match.url}/>
                 </Route>
             </Switch>
-
         </>
     )
 }

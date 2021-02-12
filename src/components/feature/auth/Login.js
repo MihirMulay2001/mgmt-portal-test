@@ -5,7 +5,7 @@ import {Redirect, Link} from 'react-router-dom'
 
 
 async function getData(values){
-    const data = await fetch ('https://stc-mgmt-portal.herokuapp.com/user/login', {
+     const data = await fetch ('https://stc-mgmt-portal.herokuapp.com/user/login', {
         method:'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -29,8 +29,12 @@ const validateValues = (values) =>{
 }
 
 export default function Login() {
-    let [data, setData] = useState({})
-    console.log(data);
+    let [isLoggedIn, setLogin ] = useState(false)
+    if(localStorage.getItem('Token')){
+        return(
+            <Redirect to='/dashboard' />
+        )
+    }
     
     return (
         <div>
@@ -38,15 +42,19 @@ export default function Login() {
                 initialValues = {{ username:'' , password : '' }}
                 validate = {validateValues}
                 onSubmit = {
-                    (values,{setSubmitting}) =>{
-                        setTimeout(async ()=>{
-                            console.log(JSON.stringify(values));
-                            const {Token, message} = await getData(values)
-                            setData({Token,message})
-                            setSubmitting(false);
-                        }, 500)
-                        
-                    }
+                    async (values,{setSubmitting}) =>{
+                            setSubmitting(true)
+                            const data = await getData(values);
+                            if(Object.entries(data).length === 1){
+                                alert(data.message)
+                                setSubmitting(false);
+                            }
+                            else{
+                                localStorage.setItem('Token',data.Token)
+                                setLogin(true);
+                            }
+                        }
+                     
                     }
             >
                 <Form className={styles.form}>

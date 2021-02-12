@@ -3,9 +3,11 @@ import Navbar from '../../Navbar/Navbar'
 import Content from '../../layout/Content'
 import {Link} from 'react-router-dom'
 import {useRouteMatch, Switch, Route} from 'react-router-dom'
-import CreateMeet from './JoinMeet'
-import JoinMeet from'./CreateMeet'
+import JoinMeet from './JoinMeet'
+import CreateMeet from'./CreateMeet'
 import MeetingDetails from './MeetDetails'
+import Conference from './Conference'
+import {useState} from 'react'
 
 const MeetingLandingPage = ({path}) =>{
     return (
@@ -29,6 +31,7 @@ const MeetingLandingPage = ({path}) =>{
 }
 
 export default function Meetings({path}) {
+    const [meetingDetails, setMeetingDetails] = useState({})
     const match = useRouteMatch()
     return (
         <>
@@ -39,13 +42,16 @@ export default function Meetings({path}) {
                         <MeetingLandingPage path = {match.url}/>
                     </Route>
                     <Route path ={`${match.url}/createmeet`}>
-                        <CreateMeet/>
+                        <CreateMeet setMeetingDetails={setMeetingDetails}/>
                     </Route>
                     <Route path ={`${match.url}/joinmeet`}>
                         <JoinMeet/>
                     </Route>
                     <Route  path ={`${match.url}/meetdetails`}>
                         <MeetingDetails/>
+                    </Route>
+                    <Route  path ={`${match.url}/conference`}>
+                        <Conference meetingDetails={meetingDetails}/>
                     </Route>
                 </Switch>
             </Content>

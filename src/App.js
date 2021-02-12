@@ -1,14 +1,17 @@
-import React, { Component } from 'react'
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import LandingPage from './components/pages/LandingPage'
 import DashBoard from './components/pages/DashBoard'
 
-export default class App extends Component {
-
-    render() {
+export default function App() {
         return (
             <>
                 <Router>
+                    {
+                    localStorage.getItem('Token')
+                    ?
+                        <Redirect to='/dashboard' />
+                    : ''
+                    }
                     <Switch>
                         <Route exact path='/'>
                             <LandingPage />
@@ -20,5 +23,4 @@ export default class App extends Component {
                 </Router>
             </>
         )
-    }
 }

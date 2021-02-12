@@ -3,25 +3,25 @@ import {useState} from 'react'
 import LoginForm from '../feature/auth/Login'
 import SignUpForm from '../feature/auth/SignUp'
 import styles from '../../assets/css/modules/LandingPage.module.css'
+import Img from '../../assets/images/Landing_page.png'
 
 
 export default function LandingPage() {
     const [flag, setFlag] = useState('signup')
     return (
         <>
-            <Header/>
             <div className={styles.container}>
-                <section className={styles.intro}>
-                    insert Image here
-                </section>
-                <section className={styles.auth}>
-                    <button
+                <div className={styles.intro}>
+                <img src={Img} />    
+                </div>
+                <div className={styles.auth}>
+                    <button className={styles.button}
                     onClick={(e)=>{ 
                         e.preventDefault();
                         setFlag("signup")}}
                     >
                     Sign Up</button>
-                    <button
+                    <button className={styles.button}
                     onClick={(e)=>{ 
                         e.preventDefault();
                         setFlag("login")}}
@@ -32,7 +32,7 @@ export default function LandingPage() {
                         ?   <LoginForm />
                         :   <SignUpForm />
                     }
-                </section>
+                </div>
             </div>
         </>
         

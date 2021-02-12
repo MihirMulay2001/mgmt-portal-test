@@ -1,23 +1,29 @@
 .container {
   display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 .intro {
   width: 60%;
   height: 100%;
 }
+.intro img {
+  height: 100vh;
+  width: 100vw;
+}
 .auth {
   width: 40%;
   height: 100%;
-  background-color: rgb(221, 221, 221);
+  background-color: rgb(221, 221, 221, 0);
 }
-.auth button {
+.button {
   width: 50%;
   height: 6vh;
   color: black;
   font-size: 20px;
   font-weight: 600;
   font-family: "Times New Roman", Times, serif;
-  margin: 3vh 0 1vh 0;
+  margin-bottom: 1vh;
   border: none;
   cursor: pointer;
   background: transparent
