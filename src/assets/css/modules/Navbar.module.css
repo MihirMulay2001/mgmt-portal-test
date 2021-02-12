@@ -3,13 +3,22 @@
   left: 0;
   top: 0;
   height: 100%;
-  width: 5vw;
+  width: 4vw;
   background: transparent
     linear-gradient(270deg, #a2d2ff 0%, #cdb4db 100%, #516980 100%) 0% 0%
     no-repeat padding-box;
 }
+
 .nav div {
   margin-top: 10vh;
-  height: 7vh;
+  height: 8vh;
+  padding-top: 3vh;
   cursor: pointer;
+}
+.nav svg {
+  height: 2.5vh;
+  width: 4vw;
+}
+.nav .logoutButton {
+  margin-top: 40vh;
 }

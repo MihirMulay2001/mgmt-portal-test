@@ -9,9 +9,10 @@ export default class Joinmeet extends Component {
         this.state = {
             data: {}
         }
+        this.Meetcard = this.Meetcard.bind(this)
     }
     async componentDidMount(){
-        const authToken ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIxYTU5Mzg4OGYzMTAwMTU0NzliMjMiLCJpYXQiOjE2MTMxMTA4NDd9.C4VrazaN10hf90yr9VtYnX7O3iY4f6ijgV_AEa3dGmQ'
+        const authToken = localStorage.getItem('Token')
    
         const data = await fetch('https://stc-mgmt-portal.herokuapp.com/meeting/activeMeetings',{
             method: 'GET',
@@ -25,7 +26,6 @@ export default class Joinmeet extends Component {
         this.setState({
             data: dataJson
         })
-        this.Meetcard = this.Meetcard.bind(this)
     }
     Meetcard({meet}){
         return(

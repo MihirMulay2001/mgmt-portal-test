@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 70vw;
+}
+.container .card {
+  margin: 4vh;
+  height: 11vh;
+  border-radius: 15px;
+  padding: 8px;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: rgb(235, 230, 230);
+  display: flex;
+  flex-direction: column;
+}
+.card div {
+  margin: 1vh;
+}
+.container .card h3 {
+  margin-right: 2vw;
+  display: inline;
+}

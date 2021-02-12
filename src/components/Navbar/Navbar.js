@@ -1,5 +1,8 @@
 import styles from '../../assets/css/modules/Navbar.module.css'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import {ReactComponent as ProfilePicture} from '../../assets/images/profile.svg'
+import {ReactComponent as Logout} from '../../assets/images/logout.svg'
+import {ReactComponent as VideoCall} from '../../assets/images/Videocall.svg'
 
 function logoutUser(setLogin){
     localStorage.removeItem('Token');
@@ -14,13 +17,13 @@ export default function Navbar({active, path,setLogin}) {
         <>
             <nav className={styles.nav}>
                 <Link to={`${path}/projects`}>
-                    <div style={active === 'projects' ? activeEle : {}}><img src="../../../assets/images/profile.svg" alt= "Projects" /></div>
+                    <div style={active === 'projects' ? activeEle : {}}><ProfilePicture/></div>
                 </Link>
                 <Link to={`${path}/meetings`}>
-                    <div style={active === 'meetings' ? activeEle : {}}><img src="../../../assets/images/VideoCall.svg" alt= "Meetings" /></div>
+                    <div style={active === 'meetings' ? activeEle : {}}><VideoCall /></div>
                 </Link>
-                <div onClick={()=>logoutUser(setLogin)}>
-                    Logout
+                <div className={styles.logoutButton} onClick={()=>logoutUser(setLogin)}>
+                    <Logout />
                 </div>
             </nav>
         </>

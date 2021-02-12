@@ -1,10 +1,9 @@
 import styles from '../../../assets/css/modules/inputform.module.css'
 import styles2 from '../../../assets/css/modules/createmeet.module.css'
 import {Field, Formik, ErrorMessage, Form} from 'formik'
-import {useState, useEffect} from 'react'
 
 const getMeetingInfo = async (roomName) =>{
-    const authToken ='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDIxYTU5Mzg4OGYzMTAwMTU0NzliMjMiLCJpYXQiOjE2MTMxMTA4NDd9.C4VrazaN10hf90yr9VtYnX7O3iY4f6ijgV_AEa3dGmQ'
+    const authToken = localStorage.getItem('Token')
    
     const data = await fetch('https://stc-mgmt-portal.herokuapp.com/meeting/createMeet',{
         method: 'POST',
