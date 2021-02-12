@@ -1,11 +1,12 @@
 import styles from '../../assets/css/modules/Navbar.module.css'
 import {Link, Redirect} from 'react-router-dom'
 
-function logoutUser(event){
+function logoutUser(setLogin){
     localStorage.removeItem('Token');
+    setLogin(false);
 }
 
-export default function Navbar({active, path}) {
+export default function Navbar({active, path,setLogin}) {
     const activeEle = {
         backgroundColor: 'white'
     }
@@ -18,7 +19,7 @@ export default function Navbar({active, path}) {
                 <Link to={`${path}/meetings`}>
                     <div style={active === 'meetings' ? activeEle : {}}><img src="../../../assets/images/VideoCall.svg" alt= "Meetings" /></div>
                 </Link>
-                <div onClick={logoutUser}>
+                <div onClick={()=>logoutUser(setLogin)}>
                     Logout
                 </div>
             </nav>

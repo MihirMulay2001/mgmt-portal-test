@@ -30,12 +30,12 @@ const MeetingLandingPage = ({path}) =>{
     )
 }
 
-export default function Meetings({path}) {
+export default function Meetings({path, setLogin}) {
     const [meetingDetails, setMeetingDetails] = useState({})
     const match = useRouteMatch()
     return (
         <>
-            <Navbar active="meetings" path={path} />
+            <Navbar active="meetings" path={path} setLogin={setLogin}/>
             <Content>
                 <Switch>
                     <Route exact path ={`${match.url}`}>

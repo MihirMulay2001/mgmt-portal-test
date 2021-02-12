@@ -28,14 +28,7 @@ const validateValues = (values) =>{
     return error;
 }
 
-export default function Login() {
-    let [isLoggedIn, setLogin ] = useState(false)
-    if(localStorage.getItem('Token')){
-        return(
-            <Redirect to='/dashboard' />
-        )
-    }
-    
+export default function Login({setLogin}) {
     return (
         <div>
             <Formik

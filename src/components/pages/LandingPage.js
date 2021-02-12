@@ -6,7 +6,7 @@ import styles from '../../assets/css/modules/LandingPage.module.css'
 import Img from '../../assets/images/Landing_page.png'
 
 
-export default function LandingPage() {
+export default function LandingPage({setLogin}) {
     const [flag, setFlag] = useState('signup')
     return (
         <>
@@ -29,7 +29,7 @@ export default function LandingPage() {
                     Login</button>
                     {
                         flag === "login"
-                        ?   <LoginForm />
+                        ?   <LoginForm setLogin={setLogin}/>
                         :   <SignUpForm />
                     }
                 </div>
