@@ -44,10 +44,8 @@ export default class Joinmeet extends Component {
                     <button
                         onMouseOver={(e)=>{if(meet.status === 'active'){e.target.className=styles.button}}} 
                         style ={{ background: meet.status === 'inactive' ? "grey": 'transparent linear-gradient(270deg, #a2d2ff 0%, #cdb4db 100%, #516980 100%) 0% 0% no-repeat padding-box'}}
-                        onClick = {(e)=>{
+                        onClick = {async (e)=>{
                         e.preventDefault()
-                        console.log(meet.roomName);
-                        console.log(this);
                         this.props.setMeetingDetails({roomValue: meet.roomName,name:'Name'})
                     }}>Join Meet</button>
                 </td>

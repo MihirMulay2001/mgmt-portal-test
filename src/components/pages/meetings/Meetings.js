@@ -3,7 +3,7 @@ import Navbar from '../../Navbar/Navbar'
 import Content from '../../layout/Content'
 import {Link, Redirect} from 'react-router-dom'
 import {useRouteMatch, Switch, Route} from 'react-router-dom'
-import JoinMeet from './JoinMeet'
+import JoinMeet from './Joinmeet'
 import CreateMeet from'./CreateMeet'
 import MeetingDetails from './MeetDetails'
 import Conference from './Conference'
@@ -36,12 +36,7 @@ export default function Meetings({path, setLogin}) {
     const match = useRouteMatch()
     return (
         <>
-            {
-                Object.entries(meetingDetails).length !==0
-                ?
-                <Redirect to={`${match.url}/conference`} />
-                :''
-            }
+            
             <Navbar active="meetings" path={path} setLogin={setLogin}/>
             <Content>
                 <Switch>
@@ -62,6 +57,12 @@ export default function Meetings({path, setLogin}) {
                     </Route>
                 </Switch>
             </Content>
+            {
+                Object.entries(meetingDetails).length !==0
+                ?
+                <Redirect to={`${match.url}/conference`} />
+                :''
+            }
         </>
     )
 }
