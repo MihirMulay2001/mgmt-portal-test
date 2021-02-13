@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react'
-import Navbar from '../Navbar/Navbar'
 import {Route, Switch, useRouteMatch, Redirect} from 'react-router-dom'
 import Projects from '../pages/projects/Projects'
 import Meetings from '../pages/meetings/Meetings'

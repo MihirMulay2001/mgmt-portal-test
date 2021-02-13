@@ -37,3 +37,11 @@
     0% no-repeat padding-box;
   opacity: 1;
 }
+@media screen and (max-width: 480px) {
+  .intro {
+    display: none;
+  }
+  .auth {
+    width: 100vw;
+  }
+}

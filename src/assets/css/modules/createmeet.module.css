@@ -9,3 +9,8 @@
   margin: auto;
   background-color: burlywood;
 }
+@media screen and (max-width: 480px) {
+  .container {
+    width: 90%;
+  }
+}

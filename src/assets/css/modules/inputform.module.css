@@ -47,3 +47,19 @@
   align-items: center;
   justify-content: center;
 }
+@media screen and (max-width: 480px) {
+  .form button {
+    width: 50vw;
+  }
+  .element {
+    margin: 3vh;
+    height: 14vh;
+    width: 60vw;
+  }
+  .element input {
+    height: 4vh;
+    width: 55vw;
+    border: black 1px solid;
+    margin: 1vw;
+  }
+}

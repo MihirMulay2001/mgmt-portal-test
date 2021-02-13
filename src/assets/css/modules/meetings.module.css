@@ -28,3 +28,16 @@
 .buttons button:hover {
   box-shadow: black 1px 1px 6px;
 }
+@media screen and (max-width: 480px) {
+  .container2 {
+    display: none;
+  }
+  .container1 {
+    width: 100%;
+  }
+  .buttons button {
+    height: 7vh;
+    width: 20vw;
+    margin: 4vw;
+  }
+}

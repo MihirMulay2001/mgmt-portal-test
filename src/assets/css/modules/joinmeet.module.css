@@ -38,3 +38,14 @@
   box-shadow: black 1px 1px 6px;
   cursor: pointer;
 }
+@media screen and (max-width: 480px) {
+  .container table {
+    width: 90%;
+  }
+  .container thead {
+    font-size: 14px;
+  }
+  .container table tbody tr td button {
+    width: 95%;
+  }
+}
