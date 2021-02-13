@@ -10,7 +10,7 @@ export default function Conference({meetingDetails, setMeetingDetails}){
         height: '100%'
     }
     const {loading, error, jitsi} = useJitsi(jitsiConfig);
-    setMeetingDetails({})
+    //setMeetingDetails({})
     return (
         <>
             {error && <h2>error</h2>}
@@ -20,34 +20,3 @@ export default function Conference({meetingDetails, setMeetingDetails}){
         </>
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// componentDidMount(){
-    //     const script = document.createElement("script");
-    //     script.async = true;
-    //     script.src = "https://meet.jit.si/external_api.js";
-    //     document.getElementById('jitsi-meet-conf-container').appendChild(script)
-    //     const domain = 'meet.jit.si'
-    //     const options = {
-    //     roomName: 'mihiristhebest',
-    //     width: '100%',
-    //     height: '100%',
-    //     parentNode: document.querySelector('#jitsi-meet-conf-container'),
-    //     userInfo: {
-    //         displayName: 'mihir'
-    //         }
-    //     }
-    //     const api = new JitsiMeetExternalAPI(domain , options);
-    //     console.log(api);
-    // }
-

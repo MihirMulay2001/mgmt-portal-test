@@ -4,8 +4,9 @@ import styles from '../../../assets/css/modules/joinmeet.module.css'
 import React, { Component } from 'react'
 
 export default class Joinmeet extends Component {
-    constructor(){
-        super()
+    constructor(setMeetingDetails){
+        super(setMeetingDetails)
+        this.setMeetingDetails = setMeetingDetails;
         this.state = {
             data: {}
         }
@@ -46,6 +47,8 @@ export default class Joinmeet extends Component {
                         onClick = {(e)=>{
                         e.preventDefault()
                         console.log(meet.roomName);
+                        console.log(this);
+                        this.props.setMeetingDetails({roomValue: meet.roomName,name:'Name'})
                     }}>Join Meet</button>
                 </td>
             </tr>

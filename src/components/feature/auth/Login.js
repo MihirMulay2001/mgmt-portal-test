@@ -1,7 +1,5 @@
 import { Formik, Field, Form, ErrorMessage} from 'formik'
 import styles from '../../../assets/css/modules/inputform.module.css'
-import {useState,useEffect} from 'react'
-import {Redirect, Link} from 'react-router-dom'
 
 
 async function getData(values){
