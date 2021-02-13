@@ -14,8 +14,8 @@ const getMeetingInfo = async (roomName) =>{
         },
         body: JSON.stringify({'roomName':roomName})
     })
-    const dataJson = await data.json()
-    return dataJson;
+    const {roomValue, name} = await data.json()
+    return {roomValue, name};
 }
 
 

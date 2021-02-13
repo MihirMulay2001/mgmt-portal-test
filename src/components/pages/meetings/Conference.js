@@ -1,12 +1,38 @@
+import React , {useState} from 'react'
+import {useJitsi} from 'react-jutsu'
 
-import React, { Component } from 'react'
-
-export default class Conference extends Component {
-    constructor(props){
-        super(props);
-        this.roomDetails = props.props
+export default function Conference({meetingDetails, setMeetingDetails}){
+    const jitsiConfig = {
+        roomName: meetingDetails.roomValue,
+        displayName : meetingDetails.name,
+        parentNode: 'jitsi-container',
+        width: '100%',
+        height: '100%'
     }
-    // componentDidMount(){
+    const {loading, error, jitsi} = useJitsi(jitsiConfig);
+    setMeetingDetails({})
+    return (
+        <>
+            {error && <h2>error</h2>}
+            <div id={jitsiConfig.parentNode} style={{width:'90vw'}}>
+
+            </div>
+        </>
+    )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// componentDidMount(){
     //     const script = document.createElement("script");
     //     script.async = true;
     //     script.src = "https://meet.jit.si/external_api.js";
@@ -25,13 +51,3 @@ export default class Conference extends Component {
     //     console.log(api);
     // }
 
-    render() {
-        
-        console.log(this);
-        return (
-        <>
-            <div id="jitsi-meet-conf-container" style={{height: "100vh"}}></div>
-        </>
-    )
-    }
-}

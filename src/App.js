@@ -23,7 +23,7 @@ export default function App() {
                     <LandingPage setLogin ={setLogin} />
                 </Route>
                 <Route path='/dashboard'>
-                    <DashBoard setLogin ={setLogin} />
+                    <DashBoard setLogin ={setLogin}/>
                 </Route>
             </Switch>
         </>
