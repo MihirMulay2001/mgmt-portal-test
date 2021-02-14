@@ -45,7 +45,21 @@
   overflow-x: hidden;
 }
 @media screen and (max-width: 480px) {
+  .container {
+    width: 80vw;
+  }
   .container .card {
     margin: 2vh;
+  }
+  .card div {
+    font-size: 13px;
+  }
+  .card h3 {
+    font-size: 13px;
+  }
+  .card button {
+    width: 20vw;
+    margin-top: 10px;
+    font-size: 12px;
   }
 }
