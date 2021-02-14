@@ -5,7 +5,6 @@ import {useState} from 'react'
 
 export default function App() {
     const [isLoggedIn, setLogin] = useState(localStorage.getItem('Token')?true:false);
-    console.log(isLoggedIn);
     if(isLoggedIn){
         return(
             <>

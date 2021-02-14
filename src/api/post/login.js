@@ -8,6 +8,5 @@ export default async function login(values){
         body: JSON.stringify(values)
     })
     const dataJson = await data.json();
-    console.log('fetched');
     return dataJson;
 }

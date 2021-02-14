@@ -1,14 +1,14 @@
 
 import styles from '../../../assets/css/modules/joinmeet.module.css'
 import activemeetings from '../../../api/get/activemeetings'
-import joinmeet from '../../../api/get/joinmeet'
+import joinmeet from '../../../api/post/joinmeet'
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 
 export default class Joinmeet extends Component {
-    constructor(path){
-        super(path)
-        this.path = path;
+    constructor(props){
+        super(props)
+        this.path = props.path;
         this.state = {
             joinMeet: false,
             meetings: [],
@@ -25,14 +25,15 @@ export default class Joinmeet extends Component {
     }
     async joinMeet(event, meet){
         event.preventDefault();
+        console.log(this.state.meetingDetails);
         const {roomValue, joinedBy} = await joinmeet({roomName: meet.roomName}) 
         this.setState({
-            joinMeet: true,
             meetingDetails: {
                 roomValue: roomValue,
                 name: joinedBy,
                 user: 'participant'
-            }
+            },
+            joinMeet: true,
         })
     }
     Meetcard({meet}){
@@ -51,12 +52,13 @@ export default class Joinmeet extends Component {
         )
     }
     render() {
+        console.log(this.path);
         if(this.state.joinMeet === true){
             const{roomValue,name,user} = this.state.meetingDetails;
             return(
                 <Redirect to= {{
                 pathname: `${this.path}/conference`,
-                state: {roomValue, name,user}
+                state: {roomValue:roomValue, name: name,user:user}
                 }} />
             )
         }

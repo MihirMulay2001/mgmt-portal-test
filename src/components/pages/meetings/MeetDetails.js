@@ -1,39 +1,40 @@
 import React , {Component} from 'react'
 import styles from '../../../assets/css/modules/MeetDetails.module.css'
+import activemeetings from '../../../api/get/activemeetings'
 
 export default class Meetdetails extends Component {
     constructor(){
         super()
         this.state = {
-            data: []
+            data: [],
+            submitMOM: false,
         }
-        //this.Meetingcard = this.Meetingcard.bind(this)
     }
      async componentDidMount(){
-        const authToken = localStorage.getItem('Token')
-   
-        const data = await fetch('https://stc-mgmt-portal.herokuapp.com/meeting/activeMeetings',{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': authToken
-
-            }
-        })
-        const dataJson = await data.json()
+        const dataJson = await activemeetings();
         this.setState({
-            data: dataJson.meetings
+            data: dataJson
         })
     }
     MeetingCard({item}){
         return(
             <div className={styles.card}>
                 <div>
+                    <div>
                     <h3>Topic: </h3>{item.roomName}
+                    </div>
+                    <div>
+                        <h3>Hosted by:</h3>{item.meetingStartedBy}
+                    </div>
                 </div>
                 <div>
-                    <h3>Hosted by:</h3>{item.meetingStartedBy}
+                    {
+                        typeof(item.mom)!== 'undefined' 
+                        ? <><h4>MOM:</h4><p>{item.mom}</p></> 
+                        : <><h4>Enter the MOM:</h4><textarea></textarea><button type="button">Submit MOM</button></>
+                    }
                 </div>
+                
                 
             </div>
         )

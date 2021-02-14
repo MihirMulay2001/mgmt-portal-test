@@ -1,20 +1,18 @@
 import styles from '../../../assets/css/modules/meetings.module.css'
-import Navbar from '../../Navbar/Navbar'
+import Navbar from '../../layout/Navbar/Navbar'
 import Content from '../../layout/Content'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {useRouteMatch, Switch, Route} from 'react-router-dom'
 import JoinMeet from './Joinmeet'
 import CreateMeet from'./CreateMeet'
 import MeetingDetails from './MeetDetails'
 import Conference from './Conference'
-import {useState} from 'react'
 
 const MeetingLandingPage = ({path}) =>{
     return (
         <>
         <div className={styles.container1}>
             <h1> Fast, easy and secure meetings</h1>
-            <p> Description will be filled here</p>
             <div className={styles.buttons}>
                 <Link to={`${path}/createmeet`}><button> Create meeting</button></Link>
                 <Link to={`${path}/joinmeet`}><button>Join Meeting</button></Link>
@@ -22,7 +20,6 @@ const MeetingLandingPage = ({path}) =>{
             </div>
         </div>
         <div className={styles.container2}>
-            illustration
         </div>
         </>
         
@@ -31,8 +28,6 @@ const MeetingLandingPage = ({path}) =>{
 }
 
 export default function Meetings({path, setLogin}) {
-    const [meetingDetails, setMeetingDetails] = useState({})
-    console.log(meetingDetails);
     const match = useRouteMatch()
     return (
         <>
@@ -55,12 +50,6 @@ export default function Meetings({path, setLogin}) {
                     <Route  path ={`${match.url}/conference`} render={(props)=><Conference {...props}/>}/>
                 </Switch>
             </Content>
-            {/* {
-                Object.entries(meetingDetails).length !==0
-                ?
-                <Redirect to={`${match.url}/conference`} />
-                :''
-            } */}
         </>
     )
 }

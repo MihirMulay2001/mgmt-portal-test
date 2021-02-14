@@ -14,7 +14,7 @@ const validateValues = (values) =>{
     return error;
 }
 
-export default function Login({setLogin}) {
+export default function Login({setLogin, setAuthPage}) {
     return (
         <div>
             <Formik
@@ -25,11 +25,12 @@ export default function Login({setLogin}) {
                             setSubmitting(true)
                             const data = await login(values);
                             if(Object.entries(data).length === 1){
-                                alert(data.message)
+                                alert(data.message);
                                 setSubmitting(false);
                             }
                             else{
-                                localStorage.setItem('Token',data.Token)
+                                localStorage.setItem('Token',data.Token);
+                                setSubmitting(false);
                                 setLogin(true);
                             }
                         }
@@ -46,6 +47,7 @@ export default function Login({setLogin}) {
                         <label htmlFor = "password"> Password</label>
                         <Field name="password" type="password" />
                         <span><ErrorMessage name="password" /></span>
+                        <button type="button" onClick = {(e)=>{e.preventDefault();setAuthPage(false)}} className={styles.fpbtn}>Forgot Password</button>
                     </div>
                     <button type="submit">Login</button>
                 </Form>

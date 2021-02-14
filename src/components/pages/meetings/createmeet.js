@@ -51,7 +51,7 @@ export default function CreateMeet({path}) {
                             <Field name="roomName" type="text" />
                             <span ><ErrorMessage name="roomName" /></span>
                         </div>
-                        <button type="submit">Create meeting</button>
+                        <button className={styles2.button} type="submit">Create meeting</button>
                     </Form>
                 </Formik>
             </div>

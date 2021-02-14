@@ -21,11 +21,11 @@ export default function SignUp({setFlag}) {
                 initialValues = {{name:'', email:'', username:'' , password : '', githubLink:'' }}
                 validate = {validateValues}
                 onSubmit = {
-                        async (values, {setSubmitting}) =>{
-                            setSubmitting(true);
-                            await signup(values)
-                            setSubmitting(false);
-                            setFlag('login')
+                    async (values, {setSubmitting}) =>{
+                        setSubmitting(true);
+                        await signup(values)
+                        setSubmitting(false);
+                        setFlag('login')
                     }
                 }
             >

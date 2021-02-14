@@ -10,8 +10,16 @@
   background-image: url("../../images/background.png");
   /* background-color: burlywood; */
 }
+.container .button {
+  right: 42vw;
+  bottom: 20vh;
+}
 @media screen and (max-width: 480px) {
   .container {
     width: 90%;
+  }
+  .container .button {
+    right: 20vw;
+    bottom: 50vh;
   }
 }

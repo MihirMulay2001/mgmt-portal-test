@@ -1,5 +1,5 @@
 import styles from '../../../assets/css/modules/projects.module.css'
-import Navbar from '../../Navbar/Navbar'
+import Navbar from '../../layout/Navbar/Navbar'
 import Content from '../../layout/Content'
 
 export default function Projects({path, setLogin}) {
