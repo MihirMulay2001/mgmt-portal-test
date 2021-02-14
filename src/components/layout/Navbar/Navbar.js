@@ -19,15 +19,15 @@ export default function Navbar({active, path,setLogin}) {
         <>
             <nav className={styles.nav}>
                 <Link to={`${path}/projects`}>
-                    <div style={active === 'projects' ? activeEle : {}}><Project/></div>
+                    <div title="Projects"style={active === 'projects' ? activeEle : {}}><Project/></div>
                 </Link>
                 <Link to={`${path}/meetings`}>
-                    <div style={active === 'meetings' ? activeEle : {}}><VideoCall /></div>
+                    <div title="Meetings"style={active === 'meetings' ? activeEle : {}}><VideoCall /></div>
                 </Link>
-                <div id="profileBtn" className={styles.profileButton}>
+                <div id="profileBtn" title="Name" className={styles.profileButton}>
                     <Profile />
                 </div>
-                <div id="logoutBtn" className={styles.logoutButton} onClick={()=>logoutUser(setLogin)}>
+                <div id="logoutBtn" title="Logout" className={styles.logoutButton} onClick={()=>logoutUser(setLogin)}>
                     <Logout />
                 </div>
             </nav>
