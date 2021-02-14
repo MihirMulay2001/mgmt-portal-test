@@ -54,9 +54,9 @@ export default class Meetdetails extends Component {
 
     }
     MeetingCard({item}){
-        if(this.state.submitMOM === true){
-            window.location.reload()
-        }
+        // if(this.state.submitMOM === true){
+        //     window.location.reload()
+        // }
         return(
             <div className={styles.card}>
                 <div>

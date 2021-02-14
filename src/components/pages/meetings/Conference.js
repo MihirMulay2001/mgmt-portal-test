@@ -1,5 +1,6 @@
 import React , {useState, useEffect} from 'react'
 import {useJitsi} from 'react-jutsu'
+import endmeet from '../../../api/post/endmeet'
 
 export default function Conference(props){
     const {roomValue, name, user} = props.location.state
@@ -33,9 +34,12 @@ export default function Conference(props){
     return (
         <>
             {error && <h2>error</h2>}
-            <div id={jitsiConfig.parentNode} style={{width:'90vw'}}>
-
+            <div style={{width:'100%', height:'100vh'}}>
+                <div id={jitsiConfig.parentNode} style={{width:'90vw', height:'90vh'}}>
+                </div>
+                <button style={{height: '7vh', width:'8vw'}}onClick={()=>endmeet({remove: roomValue})} >End Meet</button>
             </div>
+            
         </>
     )
 }
