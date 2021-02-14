@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/mgmt-portal-test/static/css/main.923a30a4.chunk.css",
+    "main.css": "/mgmt-portal-test/static/css/main.de879fee.chunk.css",
     "main.js": "/mgmt-portal-test/static/js/main.f6fd259e.chunk.js",
     "main.js.map": "/mgmt-portal-test/static/js/main.f6fd259e.chunk.js.map",
     "runtime-main.js": "/mgmt-portal-test/static/js/runtime-main.516a7a13.js",
@@ -8,7 +8,7 @@
     "static/js/2.5d44e602.chunk.js": "/mgmt-portal-test/static/js/2.5d44e602.chunk.js",
     "static/js/2.5d44e602.chunk.js.map": "/mgmt-portal-test/static/js/2.5d44e602.chunk.js.map",
     "index.html": "/mgmt-portal-test/index.html",
-    "static/css/main.923a30a4.chunk.css.map": "/mgmt-portal-test/static/css/main.923a30a4.chunk.css.map",
+    "static/css/main.de879fee.chunk.css.map": "/mgmt-portal-test/static/css/main.de879fee.chunk.css.map",
     "static/js/2.5d44e602.chunk.js.LICENSE.txt": "/mgmt-portal-test/static/js/2.5d44e602.chunk.js.LICENSE.txt",
     "static/media/Landing_page.14359df5.png": "/mgmt-portal-test/static/media/Landing_page.14359df5.png",
     "static/media/meetings.module.css": "/mgmt-portal-test/static/media/MeetingPage.b6a8fa0f.png",
@@ -21,7 +21,7 @@
   "entrypoints": [
     "static/js/runtime-main.516a7a13.js",
     "static/js/2.5d44e602.chunk.js",
-    "static/css/main.923a30a4.chunk.css",
+    "static/css/main.de879fee.chunk.css",
     "static/js/main.f6fd259e.chunk.js"
   ]
 }
