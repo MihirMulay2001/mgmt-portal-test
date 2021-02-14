@@ -1,10 +1,11 @@
 import React , {useState, useEffect} from 'react'
 import {useJitsi} from 'react-jutsu'
 
-export default function Conference({meetingDetails, setMeetingDetails}){
+export default function Conference(props){
+    const {roomValue, name, user} = props.location.state
     const jitsiConfig = {
-        roomName: meetingDetails.roomValue,
-        displayName : meetingDetails.name,
+        roomName: roomValue,
+        displayName : name,
         parentNode: 'jitsi-container',
         width: '100%',
         height: '100%',

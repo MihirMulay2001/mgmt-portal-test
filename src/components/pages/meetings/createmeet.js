@@ -1,49 +1,47 @@
 import styles from '../../../assets/css/modules/inputform.module.css'
 import styles2 from '../../../assets/css/modules/createmeet.module.css'
 import {Field, Formik, ErrorMessage, Form} from 'formik'
+import createmeet from '../../../api/post/createmeet'
+import {useState} from 'react'
+import {Redirect} from 'react-router-dom'
 
-const getMeetingInfo = async (roomName) =>{
-    const authToken = localStorage.getItem('Token')
-   
-    const data = await fetch('https://stc-mgmt-portal.herokuapp.com/meeting/createMeet',{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'auth-token': authToken
 
-        },
-        body: JSON.stringify({'roomName':roomName})
-    })
-    const {roomValue, name} = await data.json()
-    return {roomValue, name};
-}
 
 
 
 const validateValues = (values) =>{
     let error= {};
-    if(!values.displayname){
-        error.displayname = '*required'
-    }
     if(!values.roomName){
         error.roomName = '*required'
     }
     return error;
 }
 
-export default function CreateMeet({setMeetingDetails}) {
+export default function CreateMeet({path}) {
+    const [meetDetails, setMeetingDetails] = useState({})
+    if(Object.entries(meetDetails).length !== 0){
+        const {roomValue, name} = meetDetails;
+        return(
+            <Redirect to= {{
+                pathname: `${path}/conference`,
+                state: {roomValue:roomValue, name:name,user:'creator'}
+            }} />
+        )
+    }
+
     return (
         <>
             <div className={styles2.container}>
                 <h1> Enter room name</h1>
                 <Formik
-                    initialValues= {{roomName: '', displayname: ''}}
+                    initialValues= {{roomName: ''}}
                     validate = {validateValues}
                     onSubmit = {
                         async (values, {setSubmitting}) =>{
                             setSubmitting(true);
-                            setMeetingDetails(await getMeetingInfo(values.roomName));
+                            const data = await createmeet(values.roomName);
                             setSubmitting(false);
+                            setMeetingDetails(data)
                         }
                     }
                 >
@@ -52,11 +50,6 @@ export default function CreateMeet({setMeetingDetails}) {
                             <label htmlFor="roomName">Meet Name</label>
                             <Field name="roomName" type="text" />
                             <span ><ErrorMessage name="roomName" /></span>
-                        </div>
-                        <div className={styles.element}>
-                            <label htmlFor="displayname">Display Name</label>
-                            <Field name="displayname" type="displayname" />
-                            <span ><ErrorMessage name="displayname" /></span>
                         </div>
                         <button type="submit">Create meeting</button>
                     </Form>

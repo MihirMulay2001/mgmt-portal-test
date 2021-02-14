@@ -1,31 +1,38 @@
 
 import styles from '../../../assets/css/modules/joinmeet.module.css'
-
+import activemeetings from '../../../api/get/activemeetings'
+import joinmeet from '../../../api/get/joinmeet'
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 
 export default class Joinmeet extends Component {
-    constructor(setMeetingDetails){
-        super(setMeetingDetails)
-        this.setMeetingDetails = setMeetingDetails;
+    constructor(path){
+        super(path)
+        this.path = path;
         this.state = {
-            data: {}
+            joinMeet: false,
+            meetings: [],
+            meetingDetails: {}
         }
         this.Meetcard = this.Meetcard.bind(this)
+        this.joinMeet = this.joinMeet.bind(this)
     }
     async componentDidMount(){
-        const authToken = localStorage.getItem('Token')
-   
-        const data = await fetch('https://stc-mgmt-portal.herokuapp.com/meeting/activeMeetings',{
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': authToken
-
-            }
-        })
-        const dataJson = await data.json()
+        const meetingList = await activemeetings()
         this.setState({
-            data: dataJson
+            meetings: meetingList.reverse()
+        })
+    }
+    async joinMeet(event, meet){
+        event.preventDefault();
+        const {roomValue, joinedBy} = await joinmeet({roomName: meet.roomName}) 
+        this.setState({
+            joinMeet: true,
+            meetingDetails: {
+                roomValue: roomValue,
+                name: joinedBy,
+                user: 'participant'
+            }
         })
     }
     Meetcard({meet}){
@@ -38,22 +45,22 @@ export default class Joinmeet extends Component {
                     {meet.meetingStartedBy}
                 </td>
                 <td>
-                    {meet.status}
-                </td>
-                <td>
-                    <button
-                        onMouseOver={(e)=>{if(meet.status === 'active'){e.target.className=styles.button}}} 
-                        style ={{ background: meet.status === 'inactive' ? "grey": 'transparent linear-gradient(270deg, #a2d2ff 0%, #cdb4db 100%, #516980 100%) 0% 0% no-repeat padding-box'}}
-                        onClick = {async (e)=>{
-                        e.preventDefault()
-                        this.props.setMeetingDetails({roomValue: meet.roomName,name:'Name'})
-                    }}>Join Meet</button>
+                    <button onClick = {(e)=>this.joinMeet(e,meet)}>Join Meet</button>
                 </td>
             </tr>
         )
     }
     render() {
-        if(Object.entries(this.state.data).length === 0)
+        if(this.state.joinMeet === true){
+            const{roomValue,name,user} = this.state.meetingDetails;
+            return(
+                <Redirect to= {{
+                pathname: `${this.path}/conference`,
+                state: {roomValue, name,user}
+                }} />
+            )
+        }
+        if(Object.entries(this.state.meetings).length === 0)
         {
             return (
                 <div>
@@ -61,7 +68,7 @@ export default class Joinmeet extends Component {
                 </div>
             )
         }else{
-            const {meetings} = this.state.data;
+            const meetings = this.state.meetings;
             return(
                 <div className={styles.container}>
                     <table>
@@ -69,15 +76,17 @@ export default class Joinmeet extends Component {
                             <tr>
                                 <th>RoomName</th>
                                 <th>Meeting Started by</th>
-                                <th>Status</th>
                                 <th>Join Meet</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {meetings.map((meet, i) =>(
-                            <this.Meetcard key={i} meet={meet} />
-                            ))
-                            }
+                            {
+                                meetings.map((meet, i) =>{
+                                if(meet.status ==='inactive'){return(null)}
+                                return(
+                                <this.Meetcard key={i} meet={meet} />
+                                )}
+                            )}
                         </tbody>
                     </table>
                 </div>

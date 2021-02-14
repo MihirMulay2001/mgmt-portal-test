@@ -30,7 +30,7 @@ export default function LandingPage({setLogin}) {
                     {
                         flag === "login"
                         ?   <LoginForm setLogin={setLogin}/>
-                        :   <SignUpForm />
+                        :   <SignUpForm setFlag = {setFlag}/>
                     }
                 </div>
             </div>

@@ -1,31 +1,30 @@
-import {Route, Switch, Redirect} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import LandingPage from './components/pages/LandingPage'
 import DashBoard from './components/pages/DashBoard'
 import {useState} from 'react'
 
 export default function App() {
-    const [isLoggedIn, setLogin] = useState(false);
+    const [isLoggedIn, setLogin] = useState(localStorage.getItem('Token')?true:false);
     console.log(isLoggedIn);
-    return (
-        <>
-            {
-                !isLoggedIn 
-                ? <Redirect to ='/' />
-                : ''
-            }
-            {
-                localStorage.getItem('Token')
-                ? <Redirect to='/dashboard' />
-                :''
-            }
-            <Switch>
-                <Route exact path='/'>
-                    <LandingPage setLogin ={setLogin} />
-                </Route>
+    if(isLoggedIn){
+        return(
+            <>
                 <Route path='/dashboard'>
                     <DashBoard setLogin ={setLogin}/>
                 </Route>
-            </Switch>
-        </>
-    )
+                <Redirect to='/dashboard'/>
+            </>
+        )
+    }
+    else{
+        return(
+             <>
+                <Route exact path='/'>
+                        <LandingPage setLogin ={setLogin} />
+                </Route>
+                <Redirect to='/' />
+            </>
+        )
+       
+    }
 }

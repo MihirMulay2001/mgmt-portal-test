@@ -1,19 +1,7 @@
 import { Formik, Field, Form, ErrorMessage} from 'formik'
 import styles from '../../../assets/css/modules/inputform.module.css'
+import login from '../../../api/post/login'
 
-
-async function getData(values){
-     const data = await fetch ('https://stc-mgmt-portal.herokuapp.com/user/login', {
-        method:'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values)
-    })
-    const dataJson = await data.json();
-    console.log('fetched');
-    return dataJson
-}
 
 const validateValues = (values) =>{
     let error = {} 
@@ -35,7 +23,7 @@ export default function Login({setLogin}) {
                 onSubmit = {
                     async (values,{setSubmitting}) =>{
                             setSubmitting(true)
-                            const data = await getData(values);
+                            const data = await login(values);
                             if(Object.entries(data).length === 1){
                                 alert(data.message)
                                 setSubmitting(false);

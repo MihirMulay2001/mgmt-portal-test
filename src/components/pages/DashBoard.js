@@ -1,5 +1,4 @@
 
-import React, { Component } from 'react'
 import {Route, Switch, useRouteMatch, Redirect} from 'react-router-dom'
 import Projects from '../pages/projects/Projects'
 import Meetings from '../pages/meetings/Meetings'

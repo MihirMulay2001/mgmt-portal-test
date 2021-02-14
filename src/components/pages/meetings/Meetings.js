@@ -44,25 +44,23 @@ export default function Meetings({path, setLogin}) {
                         <MeetingLandingPage path = {match.url}/>
                     </Route>
                     <Route path ={`${match.url}/createmeet`}>
-                        <CreateMeet setMeetingDetails={setMeetingDetails}/>
+                        <CreateMeet path = {match.url}/>
                     </Route>
                     <Route path ={`${match.url}/joinmeet`}>
-                        <JoinMeet setMeetingDetails = {setMeetingDetails}/>
+                        <JoinMeet path={match.url}/>
                     </Route>
                     <Route  path ={`${match.url}/meetdetails`}>
                         <MeetingDetails/>
                     </Route>
-                    <Route  path ={`${match.url}/conference`}>
-                        <Conference meetingDetails={meetingDetails} setMeetingDetails={setMeetingDetails}/>
-                    </Route>
+                    <Route  path ={`${match.url}/conference`} render={(props)=><Conference {...props}/>}/>
                 </Switch>
             </Content>
-            {
+            {/* {
                 Object.entries(meetingDetails).length !==0
                 ?
                 <Redirect to={`${match.url}/conference`} />
                 :''
-            }
+            } */}
         </>
     )
 }

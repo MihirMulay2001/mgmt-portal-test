@@ -1,37 +1,31 @@
 import { Formik, Field, Form, ErrorMessage} from 'formik'
 import styles from '../../../assets/css/modules/inputform.module.css'
+import signup from '../../../api/post/signup'
 
 
 const validateValues = (values) =>{
     let error = {} 
     if(!values.username) error.username = '*required' ; 
     if(!values.password) error.password = '*required' ; 
+    if(values.password.length < 6) error.password = '*password should be more than 6 characters long';
     if(!values.name) error.name = '*required' ; 
     if(!values.email) error.email = '*required' ;
     return error;
 
 }
 
-export default function SignUp() {
+export default function SignUp({setFlag}) {
     return (
         <div>
             <Formik
                 initialValues = {{name:'', email:'', username:'' , password : '', githubLink:'' }}
                 validate = {validateValues}
                 onSubmit = {
-                        (values, {setSubmitting}) =>{
-                            setTimeout( ()=>{
-                                
-                                fetch ('https://stc-mgmt-portal.herokuapp.com/user/signup', {
-                                    method:'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json',
-                                    },
-                                    body: JSON.stringify(values)
-                                }).then(res => res.json())
-                                .then(({message}) => alert(message, "Please Login with your credentials"))
-                                setSubmitting(false);
-                            }, 2000)
+                        async (values, {setSubmitting}) =>{
+                            setSubmitting(true);
+                            await signup(values)
+                            setSubmitting(false);
+                            setFlag('login')
                     }
                 }
             >
