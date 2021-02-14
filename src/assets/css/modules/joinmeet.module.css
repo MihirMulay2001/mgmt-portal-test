@@ -1,0 +1,54 @@
+.container {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin-top: 5vh;
+}
+.container + div {
+  margin-left: 10vw;
+  align-self: flex-start;
+}
+.container table {
+  border-collapse: collapse;
+  width: 60%;
+  margin: auto;
+}
+.container thead {
+  font-size: 20px;
+}
+.container table tbody tr td {
+  border: 1px solid black;
+  text-align: center;
+  width: 10vw;
+  margin: 10px;
+  padding: 10px;
+  font-size: 15px;
+}
+.container table tbody tr td button {
+  padding: 6px;
+  width: 60%;
+  margin: auto;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  background: transparent
+    linear-gradient(270deg, #a2d2ff 0%, #cdb4db 100%, #516980 100%) 0% 0%
+    no-repeat padding-box;
+}
+.container button:hover {
+  box-shadow: black 1px 1px 6px;
+  cursor: pointer;
+}
+@media screen and (max-width: 480px) {
+  .container table {
+    width: 90%;
+  }
+  .container thead {
+    font-size: 14px;
+  }
+  .container table tbody tr td button {
+    width: 95%;
+  }
+}

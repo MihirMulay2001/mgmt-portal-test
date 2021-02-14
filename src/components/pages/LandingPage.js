@@ -1,38 +1,51 @@
-import Header from '../layout/Header'
 import {useState} from 'react'
 import LoginForm from '../feature/auth/Login'
 import SignUpForm from '../feature/auth/SignUp'
 import styles from '../../assets/css/modules/LandingPage.module.css'
+import Img from '../../assets/images/Landing_page.png'
+import ForgotPassword from '../feature/auth/PasswordChange'
+const AuthenticPage = ({setLogin, setAuthPage})=>{
+    const [flag,setFlag] = useState('signup')
+    return(
+        <>
+            <button className={styles.button}
+            onClick={(e)=>{ 
+                e.preventDefault();
+                setFlag("signup")}}
+            >
+            Sign Up</button>
+            <button className={styles.button}
+            onClick={(e)=>{ 
+                e.preventDefault();
+                setFlag("login")}}
+            >
+            Login</button>
+            {
+                flag === "login"
+                ?   <LoginForm setLogin={setLogin} setAuthPage={setAuthPage}/>
+                :   <SignUpForm setFlag = {setFlag}/>
+            }
+        </>
+    )
+}
 
 
-export default function LandingPage() {
-    const [flag, setFlag] = useState('signup')
+
+export default function LandingPage({setLogin}) {
+    const [authPage, setauthPage] = useState(true)
     return (
         <>
-            <Header/>
             <div className={styles.container}>
-                <section className={styles.intro}>
-                    insert Image here
-                </section>
-                <section className={styles.auth}>
-                    <button
-                    onClick={(e)=>{ 
-                        e.preventDefault();
-                        setFlag("signup")}}
-                    >
-                    Sign Up</button>
-                    <button
-                    onClick={(e)=>{ 
-                        e.preventDefault();
-                        setFlag("login")}}
-                    >
-                    Login</button>
+                <div className={styles.intro}>
+                <img src={Img} />    
+                </div>
+                <div className={styles.auth}>
                     {
-                        flag === "login"
-                        ?   <LoginForm />
-                        :   <SignUpForm />
+                    authPage
+                    ? <AuthenticPage setAuthPage={setauthPage} setLogin={setLogin}/>
+                    : <ForgotPassword  setauthPage={setauthPage}/>
                     }
-                </section>
+                </div>
             </div>
         </>
         

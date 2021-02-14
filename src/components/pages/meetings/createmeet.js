@@ -1,62 +1,60 @@
-import styles from '../../src/assets/css/modules/inputform.module.css'
-import styles2 from '../../src/assets/css/modules/createmeet.module.css'
-import Navbar from '../../src/components/shared/Navbar'
-import Content from '../../src/components/layout/Content'
+import styles from '../../../assets/css/modules/inputform.module.css'
+import styles2 from '../../../assets/css/modules/createmeet.module.css'
 import {Field, Formik, ErrorMessage, Form} from 'formik'
-import Link from 'next/link'
+import createmeet from '../../../api/post/createmeet'
+import {useState} from 'react'
+import {Redirect} from 'react-router-dom'
+
+
+
+
+
 const validateValues = (values) =>{
     let error= {};
-    if(!values.displayname){
-        error.displayname = '*required'
-    }
-    if(!values.meetname){
-        error.meetname = '*required'
+    if(!values.roomName){
+        error.roomName = '*required'
     }
     return error;
 }
 
-export default function joinmeet() {
+export default function CreateMeet({path}) {
+    const [meetDetails, setMeetingDetails] = useState({})
+    if(Object.entries(meetDetails).length !== 0){
+        const {roomValue, name} = meetDetails;
+        return(
+            <Redirect to= {{
+                pathname: `${path}/conference`,
+                state: {roomValue:roomValue, name:name,user:'creator'}
+            }} />
+        )
+    }
+
     return (
         <>
-            <Navbar active="meetings" />
-            <Content>
-                <div className={styles2.container}>
-                    <h1> Enter room name</h1>
-                    <Formik
-                        initialValues= {{meetname: '', displayname: ''}}
-                        validate = {validateValues}
-                        onSubmit = {
-                            (values, {setSubmitting}) =>{
-                                console.log(values);
-                                // fetch ('', {
-                                //         method:'POST',
-                                //         headers: {
-                                //             'Content-Type': 'application/json',
-                                //         },
-                                //         body: JSON.stringify(values)
-                                //     }).then(res => res.json())
-                                //     .then(({message}) => alert(message, "Please Login with your credentials"))
-                                    setSubmitting(false);
-                            }
+            <div className={styles2.container}>
+                <h1> Enter room name</h1>
+                <Formik
+                    initialValues= {{roomName: ''}}
+                    validate = {validateValues}
+                    onSubmit = {
+                        async (values, {setSubmitting}) =>{
+                            setSubmitting(true);
+                            const data = await createmeet(values.roomName);
+                            setSubmitting(false);
+                            setMeetingDetails(data)
                         }
-                    >
-                        <Form className={styles.form}>
-                            <div className={styles.element}>
-                                <label htmlFor="meetname">Meet Name</label>
-                                <Field name="meetname" type="text" />
-                                <span ><ErrorMessage name="meetname" /></span>
-                            </div>
-                            <div className={styles.element}>
-                                <label htmlFor="displayname">Display Name</label>
-                                <Field name="displayname" type="displayname" />
-                                <span ><ErrorMessage name="displayname" /></span>
-                            </div>
-                            <button type="submit">Create meeting</button>
-                        </Form>
-                    </Formik>
-               </div>
-
-            </Content>
+                    }
+                >
+                    <Form className={styles.form}>
+                        <div className={styles.element}>
+                            <label htmlFor="roomName">Meet Name</label>
+                            <Field name="roomName" type="text" />
+                            <span ><ErrorMessage name="roomName" /></span>
+                        </div>
+                        <button className={styles2.button} type="submit">Create meeting</button>
+                    </Form>
+                </Formik>
+            </div>
         </>
     )
 }

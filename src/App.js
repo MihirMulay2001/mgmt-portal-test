@@ -1,24 +1,29 @@
-import React, { Component } from 'react'
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import LandingPage from './components/pages/LandingPage'
 import DashBoard from './components/pages/DashBoard'
+import {useState} from 'react'
 
-export default class App extends Component {
-
-    render() {
-        return (
+export default function App() {
+    const [isLoggedIn, setLogin] = useState(localStorage.getItem('Token')?true:false);
+    if(isLoggedIn){
+        return(
             <>
-                <Router>
-                    <Switch>
-                        <Route exact path='/'>
-                            <LandingPage />
-                        </Route>
-                        <Route exact path='/dashboard'>
-                            <DashBoard />
-                        </Route>
-                    </Switch>
-                </Router>
+                <Route path='/dashboard'>
+                    <DashBoard setLogin ={setLogin}/>
+                </Route>
+                <Redirect to='/dashboard'/>
             </>
         )
+    }
+    else{
+        return(
+             <>
+                <Route exact path='/'>
+                        <LandingPage setLogin ={setLogin} />
+                </Route>
+                <Redirect to='/' />
+            </>
+        )
+       
     }
 }

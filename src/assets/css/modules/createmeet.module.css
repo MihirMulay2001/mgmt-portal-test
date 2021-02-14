@@ -3,9 +3,23 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 60%;
+  width: 50%;
   height: 85%;
   padding-top: 10vh;
   margin: auto;
-  background-color: burlywood;
+  background-image: url("../../images/background.png");
+  /* background-color: burlywood; */
+}
+.container .button {
+  right: 42vw;
+  bottom: 20vh;
+}
+@media screen and (max-width: 480px) {
+  .container {
+    width: 90%;
+  }
+  .container .button {
+    right: 20vw;
+    bottom: 50vh;
+  }
 }

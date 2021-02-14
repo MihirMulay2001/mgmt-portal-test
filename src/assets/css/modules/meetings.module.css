@@ -10,7 +10,10 @@
 }
 .container2 {
   width: 50%;
-  background-color: burlywood;
+  height: 100%;
+  background-size: 50vw 100vh;
+  background-image: url("../../images/MeetingPage.png");
+  background-repeat: no-repeat;
 }
 .buttons button {
   margin: 2vw;
@@ -27,4 +30,17 @@
 }
 .buttons button:hover {
   box-shadow: black 1px 1px 6px;
+}
+@media screen and (max-width: 480px) {
+  .container2 {
+    display: none;
+  }
+  .container1 {
+    width: 100%;
+  }
+  .buttons button {
+    height: 7vh;
+    width: 20vw;
+    margin: 4vw;
+  }
 }

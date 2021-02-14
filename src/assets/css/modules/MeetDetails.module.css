@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 70vw;
+  background: transparent
+    linear-gradient(270deg, #a2d2ff 0%, #cdb4db 100%, #516980 100%) 0% 0%
+    no-repeat padding-box;
+}
+.container .card {
+  margin: 4vh;
+  height: 16vh;
+  width: 65vw;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: rgb(235, 230, 230);
+  display: flex;
+  flex-direction: row;
+}
+.card div {
+  margin: 1vh;
+  width: 50%;
+}
+.container .card h3 {
+  margin-right: 2vw;
+  margin-bottom: 100px;
+  display: inline;
+}
+.card textarea {
+  width: 15vw;
+  height: 10vh;
+}
+.card button {
+  width: 25%;
+  height: 30%;
+  margin-left: 30px;
+  cursor: pointer;
+  border-radius: 7px;
+}
+@media screen and (max-width: 480px) {
+  .container .card {
+    margin: 2vh;
+  }
+}
