@@ -39,6 +39,11 @@
   cursor: pointer;
   border-radius: 7px;
 }
+.mom {
+  overflow: scroll;
+  height: 11vh;
+  overflow-x: hidden;
+}
 @media screen and (max-width: 480px) {
   .container .card {
     margin: 2vh;

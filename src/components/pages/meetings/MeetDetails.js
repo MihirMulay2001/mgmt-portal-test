@@ -1,6 +1,8 @@
 import React , {Component} from 'react'
 import styles from '../../../assets/css/modules/MeetDetails.module.css'
 import activemeetings from '../../../api/get/activemeetings'
+import postmom from '../../../api/post/postmom'
+import { ErrorMessage, Formik, Form, Field } from 'formik'
 
 export default class Meetdetails extends Component {
     constructor(){
@@ -9,14 +11,52 @@ export default class Meetdetails extends Component {
             data: [],
             submitMOM: false,
         }
+        this.MeetingCard = this.MeetingCard.bind(this)
+        this.MomForm = this.MomForm.bind(this)
     }
      async componentDidMount(){
         const dataJson = await activemeetings();
         this.setState({
-            data: dataJson
+            data: dataJson.reverse()
         })
     }
+    MomForm({item}){
+        const validateData =(values)=>{
+            let errors = {};
+            if(!values.mom) errors.mom = '*required'
+            return errors;
+        }
+        return(
+            <>
+                <Formik
+                    initialValues ={{roomName:item.roomName,mom: ''}}
+                    validate={validateData}
+                    onSubmit = {
+                        async (values, {setSubmitting})=>{
+                            setSubmitting(true);
+                            await postmom(values);
+                            setSubmitting(false);
+                            this.setState({
+                                submitMOM:true
+                            })
+                        }
+                    }
+                >
+                    <Form>
+                        <h4>Enter the MOM:</h4>
+                        <Field name="mom" type="textarea" />
+                        <span><ErrorMessage name='mom'/></span>
+                        <button type="submit">Submit MOM</button>
+                    </Form>
+                </Formik>
+            </>
+        )
+
+    }
     MeetingCard({item}){
+        if(this.state.submitMOM === true){
+            window.location.reload()
+        }
         return(
             <div className={styles.card}>
                 <div>
@@ -29,13 +69,11 @@ export default class Meetdetails extends Component {
                 </div>
                 <div>
                     {
-                        typeof(item.mom)!== 'undefined' 
-                        ? <><h4>MOM:</h4><p>{item.mom}</p></> 
-                        : <><h4>Enter the MOM:</h4><textarea></textarea><button type="button">Submit MOM</button></>
+                        typeof(item.MOM)!== 'undefined' 
+                        ? <><h4>MOM:</h4><p className={styles.mom}>{item.MOM}</p></> 
+                        : <this.MomForm item={item}/>
                     }
                 </div>
-                
-                
             </div>
         )
     }
